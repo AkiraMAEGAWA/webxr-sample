@@ -21,7 +21,7 @@
         if(navigator.xr){
             let text = document.createElement("p");
             text.textContent = "navigator.xr を認識しています";
-            document.getElementsByTagName("header");
+            document.getElementsByTagName("header").appendChild(text);
 
             navigator.xr.supportsSession("immersive-vr").then(() => {
                 document.getElementById("obj").appendChild(button);
