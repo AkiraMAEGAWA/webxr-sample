@@ -15,6 +15,9 @@
     </header>
     <div id="obj"></div>
     <script>
+        import WebXRPolyfill from './js/third-party/webxr-polyfill/build/webxr-polyfill.module.js';
+        let polyfill = new WebXRPolyfill();
+
         let button = document.createElement("button");
         button.textContent = "hello";
         document.getElementById("obj").appendChild(button);
