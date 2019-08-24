@@ -11,6 +11,7 @@
     <script>
         let button = document.createElement("button");
         button.textContent = "hello";
+        console.log("hey");
         if(navigator.xr){
             navigator.xr.supportsSession("immersive-vr").then(() => {
                 document.getElementById("obj").appendChild(button);
