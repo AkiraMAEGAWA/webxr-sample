@@ -14,9 +14,10 @@
         document.getElementById("obj").appendChild(button);
         console.log("hey");
         if(navigator.xr){
-            navigator.xr.supportsSession("immersive-vr").then(() => {
+            navigator.xr.supportsSession('immersive-vr').then(() => {
                 document.getElementById("obj").appendChild(button);
-            })
+                console.log("support webxr");
+            });
         }
     </script>
 </body>
