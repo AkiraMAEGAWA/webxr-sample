@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+    <header>
+        <p>HEADER</p>
+    </header>
     <div id="obj"></div>
     <script>
         let button = document.createElement("button");
@@ -14,8 +17,12 @@
         document.getElementById("obj").appendChild(button);
         button.addEventListener("click", onRequestSession);
         console.log("hey");
-        
+
         if(navigator.xr){
+            let text = document.createElement("p");
+            text.textContent = "navigator.xr を認識しています";
+            document.getElementsByTagName("header");
+
             navigator.xr.supportsSession("immersive-vr").then(() => {
                 document.getElementById("obj").appendChild(button);
                 console.log("support webxr");
@@ -24,7 +31,7 @@
 
         function onRequestSession(){
             navigator.xr.requestSession("immersive-vr").then((session) => {
-                
+
             })
         }
     </script>
