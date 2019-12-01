@@ -19,15 +19,15 @@
         // import WebXRPolyfill from "./js/third-party/webxr-polyfill/build/webxr-polyfill.module.js";
         // let polyfill = new WebXRPolyfill();
 
-        let button = document.createElement("button");
-        button.textContent = "start XR session";
-        document.getElementById("start-webxr").appendChild(button);
-        button.addEventListener("click", onRequestSession);
+        let webxrButton = document.createElement("button");
+        webxrButton.textContent = "start XR session";
+        document.getElementById("start-webxr").appendChild(webxrButton);
+        webxrButton.addEventListener("click", onRequestSession);
 
-        let button = document.createElement("button");
-        button.textContent = "start WebBluetooth session";
-        document.getElementById("start-webbluetooth").appendChild(button);
-        button.addEventListener("click", onRequestBluetoothSession);
+        let webbluetoothButton = document.createElement("button");
+        webbluetoothButton.textContent = "start WebBluetooth session";
+        document.getElementById("start-webbluetooth").appendChild(webbluetoothButton);
+        webbluetoothButton.addEventListener("click", onRequestBluetoothSession);
 
 
         if(navigator.xr){
