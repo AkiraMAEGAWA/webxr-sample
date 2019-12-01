@@ -47,6 +47,9 @@
         }
 
         if(navigator.bluetooth){
+            navigator.bluetooth.requestDevice({
+                acceptAllDevices: true
+            });
             let text = document.createElement("p");
             text.textContent = "navigator.bluetoothを認識しています";
             document.getElementById("header").appendChild(text);
