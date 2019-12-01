@@ -40,6 +40,12 @@
 
             })
         }
+
+        if(navigator.bluetooth){
+            let text = document.createElement("p");
+            text.textContent = "navigator.bluetoothを認識しています";
+            document.getElementById("header").appendChild(text);
+        }
     </script>
 </body>
 </html>
