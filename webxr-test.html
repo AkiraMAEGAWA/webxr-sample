@@ -15,6 +15,7 @@
     </header>
     <div id="start-webxr"></div>
     <div id="start-webbluetooth"></div>
+    <div id="error-message"></div>
     <script>
         // import WebXRPolyfill from "./js/third-party/webxr-polyfill/build/webxr-polyfill.module.js";
         // let polyfill = new WebXRPolyfill();
@@ -51,15 +52,21 @@
             })
         }
 
-        if(navigator.bluetooth){
-            
-            let text = document.createElement("p");
-            text.textContent = "navigator.bluetoothを認識しています";
-            document.getElementById("header").appendChild(text);
-        } else {
-            let text = document.createElement("p");
-            text.textContent = "navigator.bluetoothを認識していません";
-            document.getElementById("header").appendChild(text);
+        try {
+            if(navigator.bluetooth){
+                let text = document.createElement("p");
+                text.textContent = "navigator.bluetoothを認識しています";
+                document.getElementById("header").appendChild(text);
+            } else {
+                let text = document.createElement("p");
+                text.textContent = "navigator.bluetoothを認識していません";
+                document.getElementById("header").appendChild(text);
+            }
+        } catch(e) {
+            let errorText = document.createElement("p");
+            errorText.textContent = e.message;
+            document.getElementById("error-message").appendChild(errorText);
+            console.log(errorText.textContent);
         }
 
         function onRequestBluetoothSession(){
