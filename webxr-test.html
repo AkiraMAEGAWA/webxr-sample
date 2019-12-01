@@ -13,16 +13,21 @@
     <header id="header">
         <p>対応 WEB API一覧</p>
     </header>
-    <div id="obj"></div>
+    <div id="start-webxr"></div>
+    <div id="start-webbluetooth"></div>
     <script>
         // import WebXRPolyfill from "./js/third-party/webxr-polyfill/build/webxr-polyfill.module.js";
         // let polyfill = new WebXRPolyfill();
 
         let button = document.createElement("button");
-        button.textContent = "hello";
-        document.getElementById("obj").appendChild(button);
+        button.textContent = "start XR session";
+        document.getElementById("start-webxr").appendChild(button);
         button.addEventListener("click", onRequestSession);
-        console.log("hey");
+
+        let button = document.createElement("button");
+        button.textContent = "start WebBluetooth session";
+        document.getElementById("start-webbluetooth").appendChild(button);
+        button.addEventListener("click", onRequestBluetoothSession);
 
 
         if(navigator.xr){
@@ -47,9 +52,7 @@
         }
 
         if(navigator.bluetooth){
-            navigator.bluetooth.requestDevice({
-                acceptAllDevices: true
-            });
+            
             let text = document.createElement("p");
             text.textContent = "navigator.bluetoothを認識しています";
             document.getElementById("header").appendChild(text);
@@ -57,6 +60,12 @@
             let text = document.createElement("p");
             text.textContent = "navigator.bluetoothを認識していません";
             document.getElementById("header").appendChild(text);
+        }
+
+        function onRequestBluetoothSession(){
+            navigator.bluetooth.requestDevice({
+                acceptAllDevices: true
+            });
         }
 
     </script>
