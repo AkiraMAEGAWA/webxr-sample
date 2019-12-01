@@ -33,6 +33,10 @@
                 document.getElementById("obj").appendChild(button);
                 console.log("support webxr");
             });
+        } else {
+            let text = document.createElement("p");
+            text.textContent = "navigator.xr を認識していません";
+            document.getElementById("header").appendChild(text);
         }
 
         function onRequestSession(){
@@ -45,7 +49,12 @@
             let text = document.createElement("p");
             text.textContent = "navigator.bluetoothを認識しています";
             document.getElementById("header").appendChild(text);
+        } else {
+            let text = document.createElement("p");
+            text.textContent = "navigator.bluetoothを認識していません";
+            document.getElementById("header").appendChild(text);
         }
+
     </script>
 </body>
 </html>
