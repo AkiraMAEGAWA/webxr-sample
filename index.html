@@ -152,11 +152,11 @@
                     }).catch(error => console.error(error))
                   case "write":
                     const text = document.getElementById("write_input").value
-                    characteristic.writeValue(text);
+                    characteristic.writeValue(new Uint8Array([text]));
                     return;
                   case "notify":
                     characteristic.addEventListener('characteristicvaluechanged', handler)
-
+                    alert("お知らせだよーーーー");
                     characteristic.startNotifications()
                     .catch(error => {
                         // Remove Event
