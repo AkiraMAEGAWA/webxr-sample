@@ -135,17 +135,17 @@
                         // データがnumberの場合
                         const num = getUintN(response)
                         console.log(num)
-                        break;
+                        return;
                     }).catch(error => console.error(error))
                   case "write":
                     const text = getElementById("write_input").value
                     characteristic.writeValue(text);
-                    break;
+                    return;
                   case "notify":
-                    break;
+                    return;
 
                   default:
-                    break;
+                    return;
 
                 }
                     
