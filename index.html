@@ -8,13 +8,10 @@
     <title>Wakuwaku.co.jp</title>
 </head>
 <body>
-    <header id="header">
-        WAKUWAKU
-    </header>
+    <h2>WAKUWAKU</h2>
     <div>
-        <h1>
-            対応 WEB API一覧
-        </h1>
+        <h3 id="status">対応 WEB API一覧</h3>
+
         <div id="start-webxr"></div>
         <div id="start-webbluetooth"></div>
         <div id="error-message"></div>
@@ -36,7 +33,7 @@
         if(navigator.xr){
             let text = document.createElement("p");
             text.textContent = "navigator.xr を認識しています";
-            document.getElementById("header").appendChild(text);
+            document.getElementById("status").appendChild(text);
 
             navigator.xr.supportsSession("immersive-vr").then(() => {
                 document.getElementById("obj").appendChild(button);
@@ -45,7 +42,7 @@
         } else {
             let text = document.createElement("p");
             text.textContent = "navigator.xr を認識していません";
-            document.getElementById("header").appendChild(text);
+            document.getElementById("status").appendChild(text);
         }
 
         function onRequestSession(){
@@ -58,11 +55,11 @@
             if(navigator.bluetooth){
                 let text = document.createElement("p");
                 text.textContent = "navigator.bluetoothを認識しています";
-                document.getElementById("header").appendChild(text);
+                document.getElementById("status").appendChild(text);
             } else {
                 let text = document.createElement("p");
                 text.textContent = "navigator.bluetoothを認識していません";
-                document.getElementById("header").appendChild(text);
+                document.getElementById("status").appendChild(text);
             }
         } catch(e) {
             let errorText = document.createElement("p");
