@@ -68,11 +68,60 @@
             console.log(errorText.textContent);
         }
 
+        // 数値変換
+        const getUintN = (dataView) => {
+            switch(dataView.byteLength) {
+                case 0:
+                    return 0
+                case 1:
+                    return dataView.getUint8(0)
+                case 2:
+                    return dataView.getUint16(0)
+                case 4:
+                    return dataView.getUint32(0)
+                case 8: {
+                    const top = dataView.getUint32(0) * Math.pow(2, 32)
+                    const bottom = dataView.getUint32(4)
+                    return top + bottom
+                }
+                default:
+                    return 0
+          }
+        }
+
         function onRequestBluetoothSession(){
             navigator.bluetooth.requestDevice({
-                acceptAllDevices: true
-            });
-        }
+                // 近くにある全てのデバイスを検索しているので、
+                // Running Speed and Cadenceという名前のデバイスを選択する。
+                acceptAllDevices: true,
+
+                // これがないとservice情報やcharacteristic情報が取れないため
+                // 必ず取得したいserviceを設定する必要がある。
+                // 見逃しやすいのでSERVICE_UUIDが配列の要素であることにも注意する。
+                optionalServices: [SERVICE_UUID]
+            }).then(device => {
+                return device.gatt.connect();
+            }).then(server => {
+                return server.getPrimaryService(SERVICE_UUID);
+            }).then(service =>{
+                return service.getCharacteristic("rsc_feature");
+            }).then((characteristic)  => {
+                // ここでcharacteristicに応じた処理を実装する。
+                // 試しにcharacteristicをログに出力する
+                characteristic.readValue()
+                    .then(response => {
+                // データがStringの場合
+                        const decoder = new TextDecoder('utf-8')
+                        const str = decoder.decode(response)
+                        console.log(str)
+
+                        // データがnumberの場合
+                        const num = getUintN(response)
+                        console.log(num)
+                    })
+              .catch(error => console.error(error))
+            }).catch(error => console.log(error));
+            }
 
     </script>
 </body>
