@@ -16,6 +16,19 @@
         <div id="start-webbluetooth"></div>
         <div id="error-message"></div>
     </div>
+    <div>
+        <div>
+            <button onclick="onRequestBluetoothSession('read')">read</button>
+        </div>
+        <div>
+            <input id="write_input" type="text">
+            <button onclick="onRequestBluetoothSession('write')">write</button>
+        </div>
+        <div>
+            <button onclick="onRequestBluetoothSession('notify')">notify</button>
+        </div>
+        
+    </div>
   
     <script>
 
@@ -24,10 +37,10 @@
         document.getElementById("start-webxr").appendChild(webxrButton);
         webxrButton.addEventListener("click", onRequestSession);
 
-        let webbluetoothButton = document.createElement("button");
-        webbluetoothButton.textContent = "start WebBluetooth session";
-        document.getElementById("start-webbluetooth").appendChild(webbluetoothButton);
-        webbluetoothButton.addEventListener("click", onRequestBluetoothSession);
+        // let webbluetoothButton = document.createElement("button");
+        // webbluetoothButton.textContent = "start WebBluetooth session";
+        // document.getElementById("start-webbluetooth").appendChild(webbluetoothButton);
+        // webbluetoothButton.addEventListener("click", onRequestBluetoothSession);
 
         SERVICE_UUID = 0x1814; 
 
@@ -91,7 +104,7 @@
           }
         }
 
-        function onRequestBluetoothSession(){
+        function onRequestBluetoothSession(char_type){
             navigator.bluetooth.requestDevice({
                 // 近くにある全てのデバイスを検索しているので、
                 // Running Speed and Cadenceという名前のデバイスを選択する。
@@ -109,8 +122,10 @@
                 return service.getCharacteristic("rsc_feature");
             }).then((characteristic)  => {
                 // ここでcharacteristicに応じた処理を実装する。
-                // 試しにcharacteristicをログに出力する
-                characteristic.readValue()
+
+                switch(char_type){
+                  case "read":
+                    characteristic.readValue()
                     .then(response => {
                 // データがStringの場合
                         const decoder = new TextDecoder('utf-8')
@@ -120,10 +135,22 @@
                         // データがnumberの場合
                         const num = getUintN(response)
                         console.log(num)
-                    })
-              .catch(error => console.error(error))
+                        break;
+                    }).catch(error => console.error(error))
+                  case "write":
+                    const text = getElementById("write_input").value
+                    characteristic.writeValue(text);
+                    break;
+                  case "notify":
+                    break;
+
+                  default:
+                    break;
+
+                }
+                    
             }).catch(error => console.log(error));
-            }
+        }
 
     </script>
 </body>
