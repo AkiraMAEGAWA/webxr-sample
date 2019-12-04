@@ -29,6 +29,8 @@
         document.getElementById("start-webbluetooth").appendChild(webbluetoothButton);
         webbluetoothButton.addEventListener("click", onRequestBluetoothSession);
 
+        SERVICE_UUID = 0x1814; 
+
 
         if(navigator.xr){
             let text = document.createElement("p");
