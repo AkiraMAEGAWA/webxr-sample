@@ -18,13 +18,18 @@
     </div>
     <div>
         <div>
+            <p>Bluetoothデバイスから読み込む</p>
             <button onclick="onRequestBluetoothSession('read')">read</button>
         </div>
         <div>
-            <input id="write_input" type="text">
-            <button onclick="onRequestBluetoothSession('write')">write</button>
+            <span>
+                <p>Bluetoothデバイスに書き込む</p>
+                <input id="write_input" type="text">
+                <button onclick="onRequestBluetoothSession('write')">write</button>
+            </span>
         </div>
         <div>
+            <p>お知らせする</p>
             <button onclick="onRequestBluetoothSession('notify')">notify</button>
         </div>
         
@@ -42,10 +47,10 @@
         // document.getElementById("start-webbluetooth").appendChild(webbluetoothButton);
         // webbluetoothButton.addEventListener("click", onRequestBluetoothSession);
 
-        SERVICE_UUID = 0x1814; 
-        READ_CHARACTERISTIC_UUID = "rsc_feature";
-        WRITE_CHARACTERISTIC_UUID = "sc_control_point";
-        NOTIFY_CHARACTERISTIC_UUID = "rsc_measurement";
+        const SERVICE_UUID = 0x1814; 
+        const READ_CHARACTERISTIC_UUID = "rsc_feature";
+        const WRITE_CHARACTERISTIC_UUID = "sc_control_point";
+        const NOTIFY_CHARACTERISTIC_UUID = "rsc_measurement";
 
 
         if(navigator.xr){
@@ -169,6 +174,7 @@
                     }).catch(error => console.error(error))
                   case "write":
                     const text = document.getElementById("write_input").value
+                    console.log(text);
                     characteristic.writeValue(new Uint8Array([text]));
                     return;
                   case "notify":
