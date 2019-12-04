@@ -43,6 +43,9 @@
         // webbluetoothButton.addEventListener("click", onRequestBluetoothSession);
 
         SERVICE_UUID = 0x1814; 
+        READ_CHARACTERISTIC_UUID = "rsc_feature";
+        WRITE_CHARACTERISTIC_UUID = "sc_control_point";
+        NOTIFY_CHARACTERISTIC_UUID = "rsc_measurement";
 
 
         if(navigator.xr){
@@ -132,7 +135,21 @@
             }).then(server => {
                 return server.getPrimaryService(SERVICE_UUID);
             }).then(service =>{
-                return service.getCharacteristic("rsc_feature");
+
+                switch(char_type){
+                  case "read":
+                    return service.getCharacteristic(READ_CHARACTERISTIC_UUID);
+                
+                  case "write":
+                    return service.getCharacteristic(WRITE_CHARACTERISTIC_UUID);
+
+                  case "notify":
+                    return service.getCharacteristic(NOTIFY_CHARACTERISTIC_UUID);
+
+                  default:
+                    return;
+                }
+              
             }).then((characteristic)  => {
                 // ここでcharacteristicに応じた処理を実装する。
 
