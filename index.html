@@ -104,6 +104,19 @@
           }
         }
 
+        const handler = (event) => {
+            const value = event.target.value
+
+            // データがStringの場合
+            const decoder = new TextDecoder('utf-8')
+            const str = decoder.decode(value)
+            console.log(str)
+
+            // データがnumberの場合
+            const num = getUintN(value)
+            console.log(num)
+        }
+
         function onRequestBluetoothSession(char_type){
             navigator.bluetooth.requestDevice({
                 // 近くにある全てのデバイスを検索しているので、
@@ -138,10 +151,18 @@
                         return;
                     }).catch(error => console.error(error))
                   case "write":
-                    const text = getElementById("write_input").value
+                    const text = document.getElementById("write_input").value
                     characteristic.writeValue(text);
                     return;
                   case "notify":
+                    characteristic.addEventListener('characteristicvaluechanged', handler)
+
+                    characteristic.startNotifications()
+                    .catch(error => {
+                        // Remove Event
+                        characteristic.removeEventListener('characteristicvaluechanged', handler)
+                        console.error(error)
+                    })
                     return;
 
                   default:
