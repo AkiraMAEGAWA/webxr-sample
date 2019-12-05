@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>WAKUWAKU</h2>
-    <div>
+    <div style="padding-bottom: 10px">
         <h3 id="status">対応 WEB API一覧</h3>
 
         <div id="start-webxr"></div>
@@ -17,11 +17,10 @@
         <div id="error-message"></div>
     </div>
     <div>
-        <div style="border: 1px soild blue">
+        <div>
             <p>Bluetoothデバイスから読み込む</p>
             <button onclick="onRequestBluetoothSession('read')">read</button>
         </div>
-        <br>
         <div>
             <span>
                 <p>Bluetoothデバイスに書き込む</p>
@@ -29,7 +28,6 @@
                 <button onclick="onRequestBluetoothSession('write')">write</button>
             </span>
         </div>
-        <br>
         <div>
             <p>お知らせする</p>
             <button onclick="onRequestBluetoothSession('notify')">notify</button>
@@ -195,7 +193,10 @@
 
                 }
                     
-            }).catch(error => console.log(error));
+            }).catch(error => {
+              console.log(error)
+
+            });
         }
 
     </script>
